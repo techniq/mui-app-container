@@ -1,0 +1,10 @@
+{
+  "name": "stories",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "material-ui-icons": "^1.0.0-beta.17"
+  },
+  "devDependencies": {}
+}

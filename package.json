@@ -1,0 +1,37 @@
+{
+  "name": "mui-table",
+  "version": "0.0.1",
+  "description": "Orchestrates Material-UI's AppBar and Drawer components based on device",
+  "main": "index.js",
+  "repository": "https://github.com/techniq/mui-app-container",
+  "author": "Sean Lynch <techniq35@gmail.com>",
+  "license": "MIT",
+  "peerDependencies": {
+    "material-ui": "^1.0.0-beta.26",
+    "react": ">=15"
+  },
+  "dependencies": {
+    "classnames": "^2.2.5",
+    "prop-types": "^15.6.0"
+  },
+  "devDependencies": {
+    "@storybook/react": "^3.2.16",
+    "babel-cli": "^6.26.0",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-plugin-transform-react-jsx": "^6.24.1",
+    "babel-preset-env": "^1.6.1",
+    "gh-pages": "^1.1.0",
+    "material-ui": "^1.0.0-beta.26",
+    "react": "^16.1.1",
+    "react-dom": "^16.1.1"
+  },
+  "scripts": {
+    "build": "NODE_ENV=production babel src -d dist",
+    "storybook": "start-storybook -p 9009 -c stories",
+    "build-docs": "cd stories && yarn install && cd .. && build-storybook -c stories -o docs",
+    "deploy-docs": "gh-pages -d docs",
+    "preversion": "yarn build",
+    "postpublish": "yarn build-docs && yarn deploy-docs"
+  }
+}

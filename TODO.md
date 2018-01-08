@@ -1,0 +1,4 @@
+- Support changing drawerWidth (via theme?)
+  - Support mini-mode? (via theme?)
+- Determine if we can not pass down `appBarProps` and `contentProps` and handle it within `<AppContainer>`
+- Verify we can apply other classNames/props to appBar, drawers, etc
