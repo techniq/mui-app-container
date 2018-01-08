@@ -1,5 +1,5 @@
 {
-  "name": "mui-table",
+  "name": "mui-app-container",
   "version": "0.1.0",
   "description": "Orchestrates Material-UI's AppBar and Drawer components based on device width",
   "main": "index.js",
