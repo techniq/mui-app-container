@@ -6,3 +6,53 @@ Orchestrates Material-UI 1.0's [AppBar](https://material-ui-next.com/demos/app-b
 - Shifts and resizes `<AppBar>` and content based when `<Drawer>` is `persistent` and `open`
 - Provides `toggleDrawer` to close drawer
   - Supports toggling drawer only when type is temporary (`onClick` on list item on drawer) or on all calls (AppBar menu icon)
+
+## Usage
+```js
+import AppContainer from 'mui-app-container';
+
+export default () => (
+  <AppContainer>
+    {({ getAppBarProps, getDrawerProps, getContentProps, toggleDrawer }) => (
+      <div>
+        <AppBar {...getAppBarProps()}>
+          <Toolbar>
+            <IconButton
+              color="contrast"
+              aria-label="open drawer"
+              onClick={() => toggleDrawer()}
+            >
+              <MenuIcon />
+            </IconButton>
+
+            <Typography type="title" color="inherit" style={{ flex: 1 }} noWrap>
+              App Container Example
+            </Typography>
+
+            <IconButton color="contrast">
+              <AccountCircle />
+            </IconButton>
+          </Toolbar>
+        </AppBar>
+
+        <Drawer {...getDrawerProps()}>
+          <div>
+            <Divider />
+            <List>
+              {mailFolderListItems(() => toggleDrawer(true))}
+            </List>
+            <Divider />
+            <List>
+              {otherMailFolderListItems(() => toggleDrawer(true))}
+            </List>
+          </div>
+        </Drawer>
+
+        <main {...getContentProps()}>
+          <Typography>{'Content goes here'}</Typography>
+        </main>
+      </div>
+    )}
+  </AppContainer>
+);
+```
