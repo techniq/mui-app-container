@@ -1,6 +1,6 @@
 {
   "name": "mui-table",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Orchestrates Material-UI's AppBar and Drawer components based on device width",
   "main": "index.js",
   "repository": "https://github.com/techniq/mui-app-container",
