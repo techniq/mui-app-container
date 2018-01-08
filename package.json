@@ -1,7 +1,7 @@
 {
   "name": "mui-table",
   "version": "0.0.1",
-  "description": "Orchestrates Material-UI's AppBar and Drawer components based on device",
+  "description": "Orchestrates Material-UI's AppBar and Drawer components based on device width",
   "main": "index.js",
   "repository": "https://github.com/techniq/mui-app-container",
   "author": "Sean Lynch <techniq35@gmail.com>",
