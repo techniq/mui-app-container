@@ -3,57 +3,75 @@ import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import classNames from 'classnames';
 
-const drawerWidth = 240;
+const DEFAULT_DRAWER_WIDTH = 240;
 
-const styles = theme => ({
-  appBar: {
-    transition: theme.transitions.create(['margin', 'width'], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-  },
-  appBarShift: {
-    [theme.breakpoints.up('md')]: {
-      width: `calc(100% - ${drawerWidth}px)`,
+const styles = theme => {
+  let drawerWidth;
+  if (theme.overrides &&
+    theme.overrides.MuiAppContainer &&
+    theme.overrides.MuiAppContainer.drawerWidth
+  ) {
+    drawerWidth = theme.overrides.MuiAppContainer.drawerWidth
+  } else if (theme.overrides &&
+    theme.overrides.MuiDrawer &&
+    theme.overrides.MuiDrawer.paper &&
+    theme.overrides.MuiDrawer.paper.width
+  ) {
+    drawerWidth = theme.overrides.MuiDrawer.paper.width
+  } else {
+    drawerWidth = DEFAULT_DRAWER_WIDTH;
+  }
+
+  return {
+    appBar: {
       transition: theme.transitions.create(['margin', 'width'], {
+        easing: theme.transitions.easing.sharp,
+        duration: theme.transitions.duration.leavingScreen,
+      }),
+    },
+    appBarShift: {
+      [theme.breakpoints.up('md')]: {
+        width: `calc(100% - ${drawerWidth}px)`,
+        transition: theme.transitions.create(['margin', 'width'], {
+          easing: theme.transitions.easing.easeOut,
+          duration: theme.transitions.duration.enteringScreen,
+        }),
+      },
+    },
+
+    content: {
+      // AppBar height on mobile (56px)
+      height: 'calc(100% - 56px)',
+      marginTop: 56, 
+
+      transition: theme.transitions.create('margin', {
+        easing: theme.transitions.easing.sharp,
+        duration: theme.transitions.duration.leavingScreen,
+      }),
+
+      [theme.breakpoints.up('sm')]: {
+        // AppBar height on mobile (64px)
+        height: 'calc(100% - 64px)',
+        marginTop: 64,
+      },
+    },
+    contentShift: {
+      transition: theme.transitions.create('margin', {
         easing: theme.transitions.easing.easeOut,
         duration: theme.transitions.duration.enteringScreen,
       }),
+
+      [theme.breakpoints.up('md')]: {
+        width: `calc(100% - ${drawerWidth}px)`,
+        [theme.direction === 'rtl'  ? 'marginRight' : 'marginLeft']: drawerWidth,
+      }
     },
-  },
 
-  content: {
-    // AppBar height on mobile (56px)
-    height: 'calc(100% - 56px)',
-    marginTop: 56, 
-
-    transition: theme.transitions.create('margin', {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-
-    [theme.breakpoints.up('sm')]: {
-      // AppBar height on mobile (64px)
-      height: 'calc(100% - 64px)',
-      marginTop: 64,
+    drawerPaper: {
+      width: drawerWidth,
     },
-  },
-  contentShift: {
-    transition: theme.transitions.create('margin', {
-      easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-
-    [theme.breakpoints.up('md')]: {
-      width: `calc(100% - ${drawerWidth}px)`,
-      [theme.direction === 'rtl'  ? 'marginRight' : 'marginLeft']: drawerWidth,
-    }
-  },
-
-  drawerPaper: {
-    width: drawerWidth,
-  },
-});
+  }
+};
 
 class AppContainer extends React.Component {
 
