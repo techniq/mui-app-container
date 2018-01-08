@@ -16,10 +16,7 @@ import { mailFolderListItems, otherMailFolderListItems } from '../stories/tileDa
 import AppContainer from '../src';
 
 storiesOf('Examples', module)
-  .add('empty (no errors)', () => (
-    <AppContainer />
-  ))
-  .add('simple', () => (
+  .add('basic', () => (
     <AppContainer>
       {({ getAppBarProps, getDrawerProps, getContentProps, toggleDrawer }) => (
         <div>
@@ -58,4 +55,7 @@ storiesOf('Examples', module)
         </div>
       )}
     </AppContainer>
+  ))
+  .add('empty (no errors)', () => (
+    <AppContainer />
   ))

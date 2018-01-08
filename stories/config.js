@@ -14,7 +14,7 @@ addDecorator(storyFn => (
 ));
 
 function loadStories() {
-  require('../stories/basic');
+  require('../stories/examples');
 }
 
 configure(loadStories, module);
