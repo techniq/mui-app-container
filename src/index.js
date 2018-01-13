@@ -43,7 +43,7 @@ const styles = theme => {
       // AppBar height on mobile (56px)
       marginTop: 56, 
 
-      transition: theme.transitions.create('margin', {
+      transition: theme.transitions.create(['margin', 'width'], {
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.leavingScreen,
       }),
@@ -54,7 +54,7 @@ const styles = theme => {
       },
     },
     contentShift: {
-      transition: theme.transitions.create(['marginLeft', 'marginRight'], {
+      transition: theme.transitions.create(['margin', 'width'], {
         easing: theme.transitions.easing.easeOut,
         duration: theme.transitions.duration.enteringScreen,
       }),
