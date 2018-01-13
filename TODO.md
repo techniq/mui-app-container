@@ -1,3 +1,2 @@
 - Verify we can apply other classNames/props to appBar, drawers, etc
 - Support mini-mode? (via theme?) - https://material-ui-next.com/demos/drawers/#mini-variant-drawer
-- Determine if we can not pass down `appBarProps` and `contentProps` and handle it within `<AppContainer>`

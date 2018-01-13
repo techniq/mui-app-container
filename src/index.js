@@ -32,6 +32,7 @@ const styles = theme => {
     appBarShift: {
       [theme.breakpoints.up('md')]: {
         width: `calc(100% - ${drawerWidth}px)`,
+
         transition: theme.transitions.create(['margin', 'width'], {
           easing: theme.transitions.easing.easeOut,
           duration: theme.transitions.duration.enteringScreen,
@@ -40,28 +41,26 @@ const styles = theme => {
     },
 
     content: {
-      // AppBar height on mobile (56px)
-      marginTop: 56, 
-
-      transition: theme.transitions.create(['margin', 'width'], {
-        easing: theme.transitions.easing.sharp,
-        duration: theme.transitions.duration.leavingScreen,
-      }),
+      marginTop: 56, // AppBar height on mobile (56px)
 
       [theme.breakpoints.up('sm')]: {
-        // AppBar height on mobile (64px)
-        marginTop: 64,
+        marginTop: 64, // AppBar height on mobile (64px)
+
+        transition: theme.transitions.create(['margin', 'width'], {
+          easing: theme.transitions.easing.sharp,
+          duration: theme.transitions.duration.leavingScreen,
+        }),
       },
     },
     contentShift: {
-      transition: theme.transitions.create(['margin', 'width'], {
-        easing: theme.transitions.easing.easeOut,
-        duration: theme.transitions.duration.enteringScreen,
-      }),
-
       [theme.breakpoints.up('md')]: {
         width: `calc(100% - ${drawerWidth}px)`,
         [theme.direction === 'rtl'  ? 'marginRight' : 'marginLeft']: drawerWidth,
+
+        transition: theme.transitions.create(['margin', 'width'], {
+          easing: theme.transitions.easing.easeOut,
+          duration: theme.transitions.duration.enteringScreen,
+        }),
       }
     },
 
@@ -190,15 +189,25 @@ class AppContainer extends React.Component {
   }
 
   render() {
-    const { classes, theme, children } = this.props;
+    const { classes, theme, disableContainer, children } = this.props;
 
     if (typeof(children) === 'function') {
-      return children({
+      const childrenResult = children({
         getAppBarProps: this.getAppBarProps,
         getContentProps: this.getContentProps,
         getDrawerProps: this.getDrawerProps,
         toggleDrawer: this.handleDrawerToggle
-      });
+      })
+
+      return (
+        disableContainer ? (
+          childrenResult
+        ) : (
+          <div className={classNames(classes.content, { [classes.contentShift]: this.state.drawerProps.open })}>
+            { childrenResult }
+          </div>
+        )
+      )
     } else if (React.Children.count(children) === 0) {
       return null
     } else {
@@ -213,6 +222,7 @@ class AppContainer extends React.Component {
 AppContainer.propTypes = {
   classes: PropTypes.object.isRequired,
   theme: PropTypes.object.isRequired,
+  disableContainer: PropTypes.bool,
 };
 
 export default withStyles(styles, { withTheme: true })(AppContainer);

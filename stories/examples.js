@@ -16,8 +16,8 @@ import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
 import { mailFolderListItems, otherMailFolderListItems } from '../stories/tileData';
 import AppContainer from '../src';
 
-const ExampleAppContainer = () => (
-  <AppContainer>
+const ExampleAppContainer = props => (
+  <AppContainer {...props}>
     {({ getAppBarProps, getDrawerProps, getContentProps, toggleDrawer }) => (
       <div>
         <AppBar {...getAppBarProps()}>
@@ -53,7 +53,7 @@ const ExampleAppContainer = () => (
           </div>
         </Drawer>
 
-        <main {...getContentProps()}>
+        <main {...props.disableContainer && getContentProps()}>
           <Typography noWrap>{'You think water moves fast? You should see ice.'}</Typography>
         </main>
       </div>
@@ -64,6 +64,10 @@ const ExampleAppContainer = () => (
 storiesOf('Examples', module)
   .add('basic', () => (
     <ExampleAppContainer />
+  ))
+
+  .add('disableContainer (apply getContentProps manually)', () => (
+    <ExampleAppContainer disableContainer />
   ))
 
   .add('override drawer width (MuiAppContainer)', () => {
