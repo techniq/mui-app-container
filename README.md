@@ -13,7 +13,7 @@ import AppContainer from 'mui-app-container';
 
 export default () => (
   <AppContainer>
-    {({ getAppBarProps, getDrawerProps, getContentProps, toggleDrawer }) => (
+    {({ getAppBarProps, getDrawerProps, toggleDrawer }) => (
       <div>
         <AppBar {...getAppBarProps()}>
           <Toolbar>
@@ -48,7 +48,7 @@ export default () => (
           </div>
         </Drawer>
 
-        <main {...getContentProps()}>
+        <main>
           <Typography>{'Content goes here'}</Typography>
         </main>
       </div>
