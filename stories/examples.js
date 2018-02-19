@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import { storiesOf } from '@storybook/react';
 // import { action } from '@storybook/addon-actions';
 
+// Imported here to test CSS stylesheet order
+import AppContainer from '../src';
+
 import AppBar from 'material-ui/AppBar'
 import Drawer from 'material-ui/Drawer';
 import Divider from 'material-ui/Divider';
@@ -14,7 +17,6 @@ import AccountCircle from 'material-ui-icons/AccountCircle';
 import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
 
 import { mailFolderListItems, otherMailFolderListItems } from '../stories/tileData';
-import AppContainer from '../src';
 
 const ExampleAppContainer = props => (
   <AppContainer {...props}>
