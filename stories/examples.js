@@ -23,18 +23,18 @@ const ExampleAppContainer = props => (
         <AppBar {...getAppBarProps()}>
           <Toolbar>
             <IconButton
-              color="contrast"
+              color="inherit"
               aria-label="open drawer"
               onClick={() => toggleDrawer()}
             >
               <MenuIcon />
             </IconButton>
 
-            <Typography type="title" color="inherit" style={{ flex: 1 }} noWrap>
+            <Typography variant="title" color="inherit" style={{ flex: 1 }} noWrap>
               Responsive drawer
             </Typography>
 
-            <IconButton color="contrast">
+            <IconButton color="inherit">
               <AccountCircle />
             </IconButton>
           </Toolbar>

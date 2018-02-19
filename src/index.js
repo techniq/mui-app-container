@@ -89,7 +89,7 @@ class AppContainer extends React.Component {
         className: classNames(classes.content, { [classes.contentShift]: drawerOpen })
       },
       drawerProps: {
-        type: drawerOpen ? 'persistent' : 'temporary',
+        variant: drawerOpen ? 'persistent' : 'temporary',
         open: drawerOpen,
         onClose: () => this.handleDrawerToggle(),
         classes: {
@@ -120,13 +120,13 @@ class AppContainer extends React.Component {
 
       drawerProps: {
         ...prevState.drawerProps,
-        type: this.mediaQueryList.matches ? 'persistent' : 'temporary'
+        variant: this.mediaQueryList.matches ? 'persistent' : 'temporary'
       },
     }));
   };
 
   handleDrawerToggle = (temporaryOnly) => {
-    if (temporaryOnly == null || (temporaryOnly && this.state.drawerProps.type === 'temporary')) {
+    if (temporaryOnly == null || (temporaryOnly && this.state.drawerProps.variant === 'temporary')) {
       this.setState(prevState => {
         const drawerOpen = !prevState.drawerProps.open; 
         const { classes } = this.props;
