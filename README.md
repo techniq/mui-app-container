@@ -6,6 +6,7 @@ Orchestrates Material-UI 1.0's [AppBar](https://material-ui-next.com/demos/app-b
 - Shifts and resizes `<AppBar>` and content based when `<Drawer>` is `persistent` and `open`
 - Provides `toggleDrawer` to close drawer
   - Supports toggling drawer only when variant is temporary (`onClick` on list item on drawer) or on all calls (AppBar menu icon)
+- Access state via context using `<AppContainer.Consumer>`
 
 ## Usage
 ```js

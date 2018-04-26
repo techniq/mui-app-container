@@ -1,2 +1,0 @@
-- Verify we can apply other classNames/props to appBar, drawers, etc
-- Support mini-mode? (via theme?) - https://material-ui-next.com/demos/drawers/#mini-variant-drawer
