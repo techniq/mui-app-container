@@ -9,6 +9,19 @@ import Drawer from 'material-ui/Drawer';
 
 const DEFAULT_DRAWER_WIDTH = 240;
 
+const AppContainerContext = React.createContext({
+  appBarProps: {},
+  getAppBarProps: () => {},
+
+  contentProps: {},
+  getContentProps: () => {},
+
+  drawerProps: {},
+  getDrawerProps: () => {},
+
+  toggleDrawer: () => {}
+})
+
 const styles = theme => {
   let drawerWidth;
   if (theme.overrides &&
@@ -75,6 +88,7 @@ const styles = theme => {
 };
 
 class AppContainer extends React.Component {
+  static Consumer = AppContainerContext.Consumer;
 
   constructor(props) {
     super(props);
@@ -89,9 +103,13 @@ class AppContainer extends React.Component {
       appBarProps: {
         className: classNames(classes.appBar, { [classes.appBarShift]: drawerOpen, })
       },
+      getAppBarProps: this.getAppBarProps,
+
       contentProps: {
         className: classNames(classes.content, { [classes.contentShift]: drawerOpen })
       },
+      getContentProps: this.getContentProps,
+
       drawerProps: {
         variant: drawerOpen ? 'persistent' : 'temporary',
         open: drawerOpen,
@@ -102,7 +120,10 @@ class AppContainer extends React.Component {
         ModalProps: {
           keepMounted: true, // Better open performance on mobile.
         }
-      }
+      },
+      getDrawerProps: this.getDrawerProps,
+
+      toggleDrawer: this.handleDrawerToggle
     }
   }
 
@@ -192,34 +213,33 @@ class AppContainer extends React.Component {
     }
   }
 
-  render() {
-    const { classes, theme, disableContainer, children } = this.props;
+  renderChildren() {
+    const { classes, disableContainer, children } = this.props;
 
-    if (typeof(children) === 'function') {
-      const childrenResult = children({
-        getAppBarProps: this.getAppBarProps,
-        getContentProps: this.getContentProps,
-        getDrawerProps: this.getDrawerProps,
-        toggleDrawer: this.handleDrawerToggle
-      })
+    const wrappedChildren = 
+      typeof(children) === 'function' ? (
+        <AppContainerContext.Consumer>{children}</AppContainerContext.Consumer>
+      ) : (
+        children
+      );
 
-      return (
-        disableContainer ? (
-          childrenResult
-        ) : (
-          <div className={classNames(classes.content, { [classes.contentShift]: this.state.drawerProps.open })}>
-            { childrenResult }
-          </div>
-        )
+    return (
+      disableContainer ? (
+        wrappedChildren
+      ) : (
+        <div className={classNames(classes.content, { [classes.contentShift]: this.state.drawerProps.open })}>
+          {wrappedChildren}
+        </div>
       )
-    } else if (React.Children.count(children) === 0) {
-      return null
-    } else {
-      // DOM/Component children
-      // TODO: Better to check if children count === 1 and return null otherwise (like react-router)?
-      //       Currently not possible to support multiple children components/elements (until React fiber)
-      return React.Children.only(children)
-    }
+    )
+  }
+
+  render() {
+    return (
+      <AppContainerContext.Provider value={this.state}>
+        {this.renderChildren()}
+      </AppContainerContext.Provider>
+    )
   }
 }
 

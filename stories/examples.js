@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { storiesOf } from '@storybook/react';
 // import { action } from '@storybook/addon-actions';
 
@@ -21,7 +21,7 @@ import { mailFolderListItems, otherMailFolderListItems } from '../stories/tileDa
 const ExampleAppContainer = props => (
   <AppContainer {...props}>
     {({ getAppBarProps, getDrawerProps, getContentProps, toggleDrawer }) => (
-      <div>
+      <Fragment>
         <AppBar {...getAppBarProps()}>
           <Toolbar>
             <IconButton
@@ -58,8 +58,57 @@ const ExampleAppContainer = props => (
         <main {...props.disableContainer && getContentProps()}>
           <Typography noWrap>{'You think water moves fast? You should see ice.'}</Typography>
         </main>
-      </div>
+      </Fragment>
     )}
+  </AppContainer>
+)
+
+const ExampleAppContainerWithContext = props => (
+  <AppContainer {...props}>
+        <AppContainer.Consumer>
+          {({ getAppBarProps, toggleDrawer }) => (
+            <AppBar {...getAppBarProps()}>
+              <Toolbar>
+                <IconButton
+                  color="inherit"
+                  aria-label="open drawer"
+                  onClick={() => toggleDrawer()}
+                >
+                  <MenuIcon />
+                </IconButton>
+
+                <Typography variant="title" color="inherit" style={{ flex: 1 }} noWrap>
+                  Responsive drawer
+                </Typography>
+
+                <IconButton color="inherit">
+                  <AccountCircle />
+                </IconButton>
+              </Toolbar>
+            </AppBar>
+          )}
+        </AppContainer.Consumer>
+
+        <AppContainer.Consumer>
+          {({ getDrawerProps, toggleDrawer }) => (
+            <Drawer {...getDrawerProps()}>
+              <div>
+                <Divider />
+                <List>
+                  {mailFolderListItems(() => toggleDrawer(true))}
+                </List>
+                <Divider />
+                <List>
+                  {otherMailFolderListItems(() => toggleDrawer(true))}
+                </List>
+              </div>
+            </Drawer>
+          )}
+        </AppContainer.Consumer>
+
+        <main>
+          <Typography noWrap>{'You think water moves fast? You should see ice.'}</Typography>
+        </main>
   </AppContainer>
 )
 
@@ -70,6 +119,10 @@ storiesOf('Examples', module)
 
   .add('disableContainer (apply getContentProps manually)', () => (
     <ExampleAppContainer disableContainer />
+  ))
+
+  .add('using context consumers', () => (
+    <ExampleAppContainerWithContext />
   ))
 
   .add('override drawer width (MuiAppContainer)', () => {
