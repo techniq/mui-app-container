@@ -5,16 +5,17 @@ import { storiesOf } from '@storybook/react';
 // Imported here to test CSS stylesheet order
 import AppContainer from '../src';
 
-import AppBar from 'material-ui/AppBar'
-import Drawer from 'material-ui/Drawer';
-import Divider from 'material-ui/Divider';
-import IconButton from 'material-ui/IconButton';
-import List from 'material-ui/List';
-import MenuIcon from 'material-ui-icons/Menu';
-import Toolbar from 'material-ui/Toolbar';
-import Typography from 'material-ui/Typography';
-import AccountCircle from 'material-ui-icons/AccountCircle';
-import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
+import AppBar from '@material-ui/core/AppBar'
+import Drawer from '@material-ui/core/Drawer';
+import Divider from '@material-ui/core/Divider';
+import IconButton from '@material-ui/core/IconButton';
+import List from '@material-ui/core/List';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+
+import MenuIcon from '@material-ui/icons/Menu';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 
 import { mailFolderListItems, otherMailFolderListItems } from '../stories/tileData';
 
@@ -37,7 +38,7 @@ const ExampleAppContainer = props => (
             </Typography>
 
             <IconButton color="inherit">
-              <AccountCircle />
+              <AccountCircleIcon />
             </IconButton>
           </Toolbar>
         </AppBar>
@@ -82,7 +83,7 @@ const ExampleAppContainerWithContext = props => (
                 </Typography>
 
                 <IconButton color="inherit">
-                  <AccountCircle />
+                  <AccountCircleIcon />
                 </IconButton>
               </Toolbar>
             </AppBar>

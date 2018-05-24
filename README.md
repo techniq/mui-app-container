@@ -1,4 +1,4 @@
-Orchestrates Material-UI 1.0's [AppBar](https://material-ui-next.com/demos/app-bar/), [Drawer](https://material-ui-next.com/demos/drawers/) and content (ex. `<main>`) to provide a responsive application layout.
+Orchestrates Material-UI 1.0's [AppBar](https://material-ui.com/demos/app-bar/), [Drawer](https://material-ui.com/demos/drawers/) and content (ex. `<main>`) to provide a responsive application layout.
 
 - Sets `<Drawer>` props based on screen size
   - `960px` (md) and up: sets `variant`  to `persistent` and defaults `open` to `true`

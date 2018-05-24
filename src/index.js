@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from 'material-ui/styles';
 import classNames from 'classnames';
+import { withStyles } from '@material-ui/core/styles';
 
 // Added (but unused) to guarantee stylesheets are inserted before AppContainer's (https://css-tricks.com/precedence-css-order-css-matters/)
-import AppBar from 'material-ui/AppBar';
-import Drawer from 'material-ui/Drawer';
+import AppBar from '@material-ui/core/AppBar';
+import Drawer from '@material-ui/core/Drawer';
 
 const DEFAULT_DRAWER_WIDTH = 240;
 
