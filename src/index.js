@@ -20,21 +20,23 @@ const AppContainerContext = React.createContext({
   getDrawerProps: () => {},
 
   toggleDrawer: () => {}
-})
+});
 
 const styles = theme => {
   let drawerWidth;
-  if (theme.overrides &&
+  if (
+    theme.overrides &&
     theme.overrides.MuiAppContainer &&
     theme.overrides.MuiAppContainer.drawerWidth
   ) {
-    drawerWidth = theme.overrides.MuiAppContainer.drawerWidth
-  } else if (theme.overrides &&
+    drawerWidth = theme.overrides.MuiAppContainer.drawerWidth;
+  } else if (
+    theme.overrides &&
     theme.overrides.MuiDrawer &&
     theme.overrides.MuiDrawer.paper &&
     theme.overrides.MuiDrawer.paper.width
   ) {
-    drawerWidth = theme.overrides.MuiDrawer.paper.width
+    drawerWidth = theme.overrides.MuiDrawer.paper.width;
   } else {
     drawerWidth = DEFAULT_DRAWER_WIDTH;
   }
@@ -43,8 +45,8 @@ const styles = theme => {
     appBar: {
       transition: theme.transitions.create(['margin', 'width'], {
         easing: theme.transitions.easing.sharp,
-        duration: theme.transitions.duration.leavingScreen,
-      }),
+        duration: theme.transitions.duration.leavingScreen
+      })
     },
     appBarShift: {
       [theme.breakpoints.up('md')]: {
@@ -52,9 +54,9 @@ const styles = theme => {
 
         transition: theme.transitions.create(['margin', 'width'], {
           easing: theme.transitions.easing.easeOut,
-          duration: theme.transitions.duration.enteringScreen,
-        }),
-      },
+          duration: theme.transitions.duration.enteringScreen
+        })
+      }
     },
 
     content: {
@@ -65,26 +67,26 @@ const styles = theme => {
 
         transition: theme.transitions.create(['margin', 'width'], {
           easing: theme.transitions.easing.sharp,
-          duration: theme.transitions.duration.leavingScreen,
-        }),
-      },
+          duration: theme.transitions.duration.leavingScreen
+        })
+      }
     },
     contentShift: {
       [theme.breakpoints.up('md')]: {
         width: `calc(100% - ${drawerWidth}px)`,
-        [theme.direction === 'rtl'  ? 'marginRight' : 'marginLeft']: drawerWidth,
+        [theme.direction === 'rtl' ? 'marginRight' : 'marginLeft']: drawerWidth,
 
         transition: theme.transitions.create(['margin', 'width'], {
           easing: theme.transitions.easing.easeOut,
-          duration: theme.transitions.duration.enteringScreen,
-        }),
+          duration: theme.transitions.duration.enteringScreen
+        })
       }
     },
 
     drawerPaper: {
-      width: drawerWidth,
-    },
-  }
+      width: drawerWidth
+    }
+  };
 };
 
 class AppContainer extends React.Component {
@@ -95,18 +97,22 @@ class AppContainer extends React.Component {
     const { classes, theme } = props;
 
     const breakpointWidth = theme.breakpoints.width('md');
-    const mediaQuery = `(min-width: ${breakpointWidth}px)`
+    const mediaQuery = `(min-width: ${breakpointWidth}px)`;
     this.mediaQueryList = window.matchMedia(mediaQuery);
     const drawerOpen = this.mediaQueryList.matches;
 
     this.state = {
       appBarProps: {
-        className: classNames(classes.appBar, { [classes.appBarShift]: drawerOpen, })
+        className: classNames(classes.appBar, {
+          [classes.appBarShift]: drawerOpen
+        })
       },
       getAppBarProps: this.getAppBarProps,
 
       contentProps: {
-        className: classNames(classes.content, { [classes.contentShift]: drawerOpen })
+        className: classNames(classes.content, {
+          [classes.contentShift]: drawerOpen
+        })
       },
       getContentProps: this.getContentProps,
 
@@ -118,25 +124,21 @@ class AppContainer extends React.Component {
           paper: classes.drawerPaper
         },
         ModalProps: {
-          keepMounted: true, // Better open performance on mobile.
+          keepMounted: true // Better open performance on mobile.
         }
       },
       getDrawerProps: this.getDrawerProps,
 
       toggleDrawer: this.handleDrawerToggle
-    }
+    };
   }
 
   componentWillMount() {
-    this.mediaQueryList.addListener(
-      this.handleMediaQueryChange
-    );
+    this.mediaQueryList.addListener(this.handleMediaQueryChange);
   }
 
   componentWillUnmount() {
-    this.mediaQueryList.removeListener(
-      this.handleMediaQueryChange
-    );
+    this.mediaQueryList.removeListener(this.handleMediaQueryChange);
   }
 
   handleMediaQueryChange = () => {
@@ -146,29 +148,36 @@ class AppContainer extends React.Component {
       drawerProps: {
         ...prevState.drawerProps,
         variant: this.mediaQueryList.matches ? 'persistent' : 'temporary'
-      },
+      }
     }));
   };
 
-  handleDrawerToggle = (temporaryOnly) => {
-    if (temporaryOnly == null || (temporaryOnly && this.state.drawerProps.variant === 'temporary')) {
+  handleDrawerToggle = temporaryOnly => {
+    if (
+      temporaryOnly == null ||
+      (temporaryOnly && this.state.drawerProps.variant === 'temporary')
+    ) {
       this.setState(prevState => {
-        const drawerOpen = !prevState.drawerProps.open; 
+        const drawerOpen = !prevState.drawerProps.open;
         const { classes } = this.props;
 
         return {
           ...prevState,
           appBarProps: {
-            className: classNames(classes.appBar, { [classes.appBarShift]: drawerOpen })
+            className: classNames(classes.appBar, {
+              [classes.appBarShift]: drawerOpen
+            })
           },
           contentProps: {
-            className: classNames(classes.content, { [classes.contentShift]: drawerOpen })
+            className: classNames(classes.content, {
+              [classes.contentShift]: drawerOpen
+            })
           },
           drawerProps: {
             ...prevState.drawerProps,
-            open: drawerOpen,
+            open: drawerOpen
           }
-        }
+        };
       });
     }
   };
@@ -180,9 +189,9 @@ class AppContainer extends React.Component {
         otherProps && otherProps.className,
         this.state.appBarProps.className
       )
-    }
-  }
-  
+    };
+  };
+
   getContentProps = otherProps => {
     return {
       ...otherProps,
@@ -190,48 +199,50 @@ class AppContainer extends React.Component {
         otherProps && otherProps.className,
         this.state.contentProps.className
       )
-    }
-  }
+    };
+  };
 
   getDrawerProps = otherProps => {
     return {
       ...otherProps,
       ...this.state.drawerProps,
       classes: {
-        ...otherProps && otherProps.classes,
+        ...(otherProps && otherProps.classes),
         ...this.state.drawerProps.classes
       },
       onClose: () => {
         if (otherProps && otherProps.onClose) {
           otherProps.onClose();
         }
-        this.handleDrawerToggle()
+        this.handleDrawerToggle();
       },
       ModalProps: {
-        keepMounted: true, // Better open performance on mobile.
+        keepMounted: true // Better open performance on mobile.
       }
-    }
-  }
+    };
+  };
 
   renderChildren() {
     const { classes, disableContainer, children } = this.props;
 
-    const wrappedChildren = 
-      typeof(children) === 'function' ? (
+    const wrappedChildren =
+      typeof children === 'function' ? (
         <AppContainerContext.Consumer>{children}</AppContainerContext.Consumer>
       ) : (
         children
       );
 
-    return (
-      disableContainer ? (
-        wrappedChildren
-      ) : (
-        <div className={classNames(classes.content, { [classes.contentShift]: this.state.drawerProps.open })}>
-          {wrappedChildren}
-        </div>
-      )
-    )
+    return disableContainer ? (
+      wrappedChildren
+    ) : (
+      <div
+        className={classNames(classes.content, {
+          [classes.contentShift]: this.state.drawerProps.open
+        })}
+      >
+        {wrappedChildren}
+      </div>
+    );
   }
 
   render() {
@@ -239,14 +250,14 @@ class AppContainer extends React.Component {
       <AppContainerContext.Provider value={this.state}>
         {this.renderChildren()}
       </AppContainerContext.Provider>
-    )
+    );
   }
 }
 
 AppContainer.propTypes = {
   classes: PropTypes.object.isRequired,
   theme: PropTypes.object.isRequired,
-  disableContainer: PropTypes.bool,
+  disableContainer: PropTypes.bool
 };
 
 export default withStyles(styles, { withTheme: true })(AppContainer);
