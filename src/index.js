@@ -260,4 +260,5 @@ AppContainer.propTypes = {
   disableContainer: PropTypes.bool
 };
 
+export { AppContainerContext };
 export default withStyles(styles, { withTheme: true })(AppContainer);
