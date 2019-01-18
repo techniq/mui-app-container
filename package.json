@@ -1,6 +1,6 @@
 {
   "name": "mui-app-container",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "Orchestrates Material-UI's AppBar and Drawer components based on device width",
   "main": "dist/index.js",
   "types": "index.d.ts",
