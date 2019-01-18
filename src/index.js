@@ -98,7 +98,10 @@ class AppContainer extends React.Component {
 
     const breakpointWidth = theme.breakpoints.width('md');
     const mediaQuery = `(min-width: ${breakpointWidth}px)`;
-    this.mediaQueryList = window.matchMedia(mediaQuery);
+    this.mediaQueryList =
+      typeof window === 'undefined'
+        ? { matches: false }
+        : window.matchMedia(mediaQuery);
     const drawerOpen = this.mediaQueryList.matches;
 
     this.state = {
@@ -133,7 +136,7 @@ class AppContainer extends React.Component {
     };
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.mediaQueryList.addListener(this.handleMediaQueryChange);
   }
 
