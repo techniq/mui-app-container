@@ -11,13 +11,13 @@ const DEFAULT_DRAWER_WIDTH = 240;
 
 const AppContainerContext = React.createContext({
   appBarProps: {},
-  getAppBarProps: () => {},
+  getAppBarProps: props => props,
 
   contentProps: {},
-  getContentProps: () => {},
+  getContentProps: props => props,
 
   drawerProps: {},
-  getDrawerProps: () => {},
+  getDrawerProps: props => props,
 
   toggleDrawer: () => {}
 });
