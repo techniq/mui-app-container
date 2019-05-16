@@ -5,7 +5,7 @@ import { storiesOf } from '@storybook/react';
 // Imported here to test CSS stylesheet order
 import AppContainer from '../src';
 
-import AppBar from '@material-ui/core/AppBar'
+import AppBar from '@material-ui/core/AppBar';
 import Drawer from '@material-ui/core/Drawer';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
@@ -17,7 +17,10 @@ import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import MenuIcon from '@material-ui/icons/Menu';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 
-import { mailFolderListItems, otherMailFolderListItems } from '../stories/tileData';
+import {
+  mailFolderListItems,
+  otherMailFolderListItems
+} from '../stories/tileData';
 
 const ExampleAppContainer = props => (
   <AppContainer {...props}>
@@ -33,7 +36,7 @@ const ExampleAppContainer = props => (
               <MenuIcon />
             </IconButton>
 
-            <Typography variant="title" color="inherit" style={{ flex: 1 }} noWrap>
+            <Typography variant="h6" color="inherit" style={{ flex: 1 }} noWrap>
               Responsive drawer
             </Typography>
 
@@ -46,85 +49,77 @@ const ExampleAppContainer = props => (
         <Drawer {...getDrawerProps()}>
           <div>
             <Divider />
-            <List>
-              {mailFolderListItems(() => toggleDrawer(true))}
-            </List>
+            <List>{mailFolderListItems(() => toggleDrawer(true))}</List>
             <Divider />
-            <List>
-              {otherMailFolderListItems(() => toggleDrawer(true))}
-            </List>
+            <List>{otherMailFolderListItems(() => toggleDrawer(true))}</List>
           </div>
         </Drawer>
 
         <main {...props.disableContainer && getContentProps()}>
-          <Typography noWrap>{'You think water moves fast? You should see ice.'}</Typography>
+          <Typography noWrap>
+            {'You think water moves fast? You should see ice.'}
+          </Typography>
         </main>
       </Fragment>
     )}
   </AppContainer>
-)
+);
 
 const ExampleAppContainerWithContext = props => (
   <AppContainer {...props}>
-        <AppContainer.Consumer>
-          {({ getAppBarProps, toggleDrawer }) => (
-            <AppBar {...getAppBarProps()}>
-              <Toolbar>
-                <IconButton
-                  color="inherit"
-                  aria-label="open drawer"
-                  onClick={() => toggleDrawer()}
-                >
-                  <MenuIcon />
-                </IconButton>
+    <AppContainer.Consumer>
+      {({ getAppBarProps, toggleDrawer }) => (
+        <AppBar {...getAppBarProps()}>
+          <Toolbar>
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              onClick={() => toggleDrawer()}
+            >
+              <MenuIcon />
+            </IconButton>
 
-                <Typography variant="title" color="inherit" style={{ flex: 1 }} noWrap>
-                  Responsive drawer
-                </Typography>
+            <Typography variant="h6" color="inherit" style={{ flex: 1 }} noWrap>
+              Responsive drawer
+            </Typography>
 
-                <IconButton color="inherit">
-                  <AccountCircleIcon />
-                </IconButton>
-              </Toolbar>
-            </AppBar>
-          )}
-        </AppContainer.Consumer>
+            <IconButton color="inherit">
+              <AccountCircleIcon />
+            </IconButton>
+          </Toolbar>
+        </AppBar>
+      )}
+    </AppContainer.Consumer>
 
-        <AppContainer.Consumer>
-          {({ getDrawerProps, toggleDrawer }) => (
-            <Drawer {...getDrawerProps()}>
-              <div>
-                <Divider />
-                <List>
-                  {mailFolderListItems(() => toggleDrawer(true))}
-                </List>
-                <Divider />
-                <List>
-                  {otherMailFolderListItems(() => toggleDrawer(true))}
-                </List>
-              </div>
-            </Drawer>
-          )}
-        </AppContainer.Consumer>
+    <AppContainer.Consumer>
+      {({ getDrawerProps, toggleDrawer }) => (
+        <Drawer {...getDrawerProps()}>
+          <div>
+            <Divider />
+            <List>{mailFolderListItems(() => toggleDrawer(true))}</List>
+            <Divider />
+            <List>{otherMailFolderListItems(() => toggleDrawer(true))}</List>
+          </div>
+        </Drawer>
+      )}
+    </AppContainer.Consumer>
 
-        <main>
-          <Typography noWrap>{'You think water moves fast? You should see ice.'}</Typography>
-        </main>
+    <main>
+      <Typography noWrap>
+        {'You think water moves fast? You should see ice.'}
+      </Typography>
+    </main>
   </AppContainer>
-)
+);
 
 storiesOf('Examples', module)
-  .add('basic', () => (
-    <ExampleAppContainer />
-  ))
+  .add('basic', () => <ExampleAppContainer />)
 
   .add('disableContainer (apply getContentProps manually)', () => (
     <ExampleAppContainer disableContainer />
   ))
 
-  .add('using context consumers', () => (
-    <ExampleAppContainerWithContext />
-  ))
+  .add('using context consumers', () => <ExampleAppContainerWithContext />)
 
   .add('override drawer width (MuiAppContainer)', () => {
     const theme = createMuiTheme({
@@ -139,7 +134,7 @@ storiesOf('Examples', module)
       <MuiThemeProvider theme={theme}>
         <ExampleAppContainer />
       </MuiThemeProvider>
-    )
+    );
   })
 
   .add('override drawer width (MuiDrawer)', () => {
@@ -157,9 +152,7 @@ storiesOf('Examples', module)
       <MuiThemeProvider theme={theme}>
         <ExampleAppContainer />
       </MuiThemeProvider>
-    )
+    );
   })
 
-  .add('empty (no errors)', () => (
-    <AppContainer />
-  ))
+  .add('empty (no errors)', () => <AppContainer />);
