@@ -13,12 +13,12 @@ declare module 'mui-app-container' {
     appBarProps: {
       className: string;
     };
-    getAppBarProps: (props: AppBarProps) => any;
+    getAppBarProps: (props?: AppBarProps) => any;
 
     contentProps: {
       className: string;
     };
-    getContentProps: (props: React.HTMLProps<HTMLElement>) => any;
+    getContentProps: (props?: React.HTMLProps<HTMLElement>) => any;
 
     drawerProps: {
       variant: 'persistent' | 'temporary';
@@ -29,7 +29,7 @@ declare module 'mui-app-container' {
       };
       ModalProps: ModalProps;
     };
-    getDrawerProps: (props: DrawerProps) => any;
+    getDrawerProps: (props?: DrawerProps) => any;
 
     toggleDrawer: (temporaryOnly?: boolean) => void;
   }
