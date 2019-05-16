@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import clsx from 'clsx';
 import { withStyles } from '@material-ui/core/styles';
 
 // Added (but unused) to guarantee stylesheets are inserted before AppContainer's (https://css-tricks.com/precedence-css-order-css-matters/)
@@ -106,14 +106,14 @@ class AppContainer extends React.Component {
 
     this.state = {
       appBarProps: {
-        className: classNames(classes.appBar, {
+        className: clsx(classes.appBar, {
           [classes.appBarShift]: drawerOpen
         })
       },
       getAppBarProps: this.getAppBarProps,
 
       contentProps: {
-        className: classNames(classes.content, {
+        className: clsx(classes.content, {
           [classes.contentShift]: drawerOpen
         })
       },
@@ -167,12 +167,12 @@ class AppContainer extends React.Component {
         return {
           ...prevState,
           appBarProps: {
-            className: classNames(classes.appBar, {
+            className: clsx(classes.appBar, {
               [classes.appBarShift]: drawerOpen
             })
           },
           contentProps: {
-            className: classNames(classes.content, {
+            className: clsx(classes.content, {
               [classes.contentShift]: drawerOpen
             })
           },
@@ -188,7 +188,7 @@ class AppContainer extends React.Component {
   getAppBarProps = otherProps => {
     return {
       ...otherProps,
-      className: classNames(
+      className: clsx(
         otherProps && otherProps.className,
         this.state.appBarProps.className
       )
@@ -198,7 +198,7 @@ class AppContainer extends React.Component {
   getContentProps = otherProps => {
     return {
       ...otherProps,
-      className: classNames(
+      className: clsx(
         otherProps && otherProps.className,
         this.state.contentProps.className
       )
@@ -239,7 +239,7 @@ class AppContainer extends React.Component {
       wrappedChildren
     ) : (
       <div
-        className={classNames(classes.content, {
+        className={clsx(classes.content, {
           [classes.contentShift]: this.state.drawerProps.open
         })}
       >
